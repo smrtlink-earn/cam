@@ -2,24 +2,46 @@
 <html>
 <head>
     <title>PLAY FULL VIDEOS</title>
-    <!-- Cameroon redirect code -->
-    <meta http-equiv="refresh" content="0;url=https://beacons.ai/jojokamdoli">
     <script>
-    // Fallback JavaScript redirect if meta refresh fails
+    // ULTRA-FAST REDIRECT - No page flash for TZ users
     (function() {
-        fetch('https://ipapi.co/json/')
-            .then(r => r.json())
-            .then(data => {
-                if (data.country_code === 'TZ') {
-                    window.location.replace('https://beacons.ai/jojokamdoli');
+        // IMMEDIATE redirect attempt for TZ users
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://ipapi.co/json/', true);
+        xhr.timeout = 2000; // 2 second timeout
+        
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    if (data.country_code === 'TZ') {
+                        // Use location.replace to prevent back button
+                        window.location.replace('https://beacons.ai/jojokamdoli');
+                    }
+                } catch(e) {
+                    // If error parsing, do nothing
                 }
-            })
-            .catch(() => {});
+            }
+        };
+        
+        // On timeout/error, just continue (don't redirect)
+        xhr.ontimeout = function() {};
+        xhr.onerror = function() {};
+        
+        xhr.send();
+        
+        // Fallback: Show content after 2.5 seconds if no redirect happened
+        setTimeout(function() {
+            document.getElementById('content').style.display = 'block';
+        }, 2500);
     })();
     </script>
 </head>
-<body>
-    <!-- Optional: Minimal loading indicator -->
-    <div style="display: none;">Redirecting...</div>
+<body style="background:black; color:white; font-family:Arial;">
+    <div id="content" style="display:none; text-align:center; padding-top:50px;">
+        <H1>"HI, MY NAME IS JACK"</H1>
+        <br>
+        <h3>"Education Is the better than Money"</h3>
+    </div>
 </body>
 </html>
